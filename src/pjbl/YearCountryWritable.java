@@ -51,7 +51,7 @@ public class YearCountryWritable implements WritableComparable<YearCountryWritab
         //A < B = -1      A = B = 0       A > B = +1
 
         int cmpCountry = this.country.compareTo(other.country);
-        if (cmpCountry != 0) { //is NOT the same?
+        if (cmpCountry != 0) { //if (is NOT the same? (== 0))
             return cmpCountry;
         }
 

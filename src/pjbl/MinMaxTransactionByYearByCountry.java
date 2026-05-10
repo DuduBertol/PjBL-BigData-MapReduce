@@ -60,19 +60,17 @@ public class MinMaxTransactionByYearByCountry {
 
         public void map(LongWritable key, Text value, Context con)
                 throws IOException, InterruptedException {
-            if (isHeader) {
-                isHeader = false;
-                return;
-            }
-
 
             String line = value.toString();
+            if (line.startsWith("country_or_area")) {
+                return;
+            }
             String[] columns = line.split(";");
 
             try {
-                int year = Integer.parseInt(columns[1]);
-                String country = columns[0];
-                int newValue = Integer.parseInt(columns[5]);
+                int year = Integer.parseInt(columns[1]); //ano
+                String country = columns[0]; //país
+                int newValue = Integer.parseInt(columns[5]); //transação
 
                 //Chave = Meu Writable Ano e País | Valor = Min Max Transações
                 //( (Afghanistan, 2016), [(6088;6088), ()...] )
